@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extJS %}
+    {# 继承父类的 #}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'js/md5.js' %}"></script>
+{% endblock %}
+
+

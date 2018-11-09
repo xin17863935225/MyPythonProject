@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extJS %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'app/mine/pending_receipt.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    {% ifequal orderAndGoodses None %}
+        <div style="margin-left: 40%;margin-top: 40%;">
+            <img style="width: 100px;height: 100px;" src="{% static 'img/pending_receipt.jpg' %}" alt="">
+            <br>
+            <span style="font-size: 35px">无记录</span>
+        </div>
+    {% else %}
+        {% for orderAndGoods1 in orderAndGoodses %}
+            <h6>订单号:{{ orderAndGoods1.first.o_number.o_number }}</h6>
+            {% for orderAndGoods in orderAndGoods1 %}
+                <ul>
+                    <li>
+                        <img src="{{ orderAndGoods.o_goods.productimg }}" alt="">
+                        <span>{{ orderAndGoods.o_goods.productlongname }}</span>
+                        <br>
+                        <span>数量:{{ orderAndGoods.o_count }}</span>
+                    </li>
+                </ul>
+            {% endfor %}
+            <button>申请退款</button>
+            <button>查看物流</button>
+            <button orderNumber="{{ orderAndGoods1.first.o_number.o_number }}" id="receipt">收货</button>
+        {% endfor %}
+
+    {% endifequal %}
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
